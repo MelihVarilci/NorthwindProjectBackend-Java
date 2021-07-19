@@ -3,6 +3,7 @@ package melihvarilci.northwind.business.concretes;
 import java.util.List;
 
 import melihvarilci.northwind.core.utilities.results.DataResult;
+import melihvarilci.northwind.core.utilities.results.ErrorDataResult;
 import melihvarilci.northwind.core.utilities.results.Result;
 import melihvarilci.northwind.core.utilities.results.SuccessDataResult;
 import melihvarilci.northwind.entities.dtos.ProductWithCategoryDto;
@@ -47,6 +48,15 @@ public class ProductManager implements ProductService {
     public Result add(Product product) {
         this.productDao.save(product);
         return new SuccessDataResult("Ürün eklendi");
+    }
+
+    @Override
+    public DataResult<Product> getById(int id) {
+        Product product = this.productDao.findById(id);
+        if (product == null){
+            return new ErrorDataResult<Product>();
+        }
+        return new SuccessDataResult<Product>(product);
     }
 
     @Override

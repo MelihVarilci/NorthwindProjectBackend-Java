@@ -38,6 +38,11 @@ public class ProductsController {
         return this.productService.add(product);
     }
 
+    @GetMapping("/getById")
+    public DataResult<Product> getById(@RequestParam int productId){
+        return this.productService.getById(productId);
+    }
+
     @GetMapping("/getByProductName")
     public DataResult<Product> getByProductName(@RequestParam String productName) {
         return this.productService.getByProductName(productName);
